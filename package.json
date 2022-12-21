@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3"
+  },
+  "name": "discord-carter-bot",
+  "description": "An alternate version of my personal bot made for a school server.",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wigglebot37/Discord-Carter-Bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Wigglebot37/Discord-Carter-Bot/issues"
+  },
+  "homepage": "https://github.com/Wigglebot37/Discord-Carter-Bot#readme"
+}
