@@ -8,6 +8,8 @@ const client = new Client({
 
 client.commands = new Collection();
 
+const clientID='1054991224785870958';
+
 require('dotenv').config();
 
 const functions = fs.readdirSync("./src/functions").filter(file => file.endsWith(".js"));
@@ -32,11 +34,15 @@ const agile='❤️';
 const carter='<:carter:1026007558416252968>';
 
 client.on(Events.MessageCreate, message => {
-    if(message.content.includes("scrum")) message.react(scrum);
-    if(message.content.includes("waterfall")) message.react(waterfall);
-    if(message.content.includes("golf")) message.react(golf);
-    if(message.content.includes("agile")) message.react(agile);
-    if(message.content.includes("carter")) message.react(carter);
+    if(message.content.toLowerCase().includes("scrum")) message.react(scrum);
+    if(message.content.toLowerCase().includes("waterfall")) message.react(waterfall);
+    if(message.content.toLowerCase().includes("golf")) message.react(golf);
+    if(message.content.toLowerCase().includes("agile")) message.react(agile);
+    if(message.content.toLowerCase().includes("carter")) message.react(carter);
+
+    if(message.content.includes(`${message.guild.members.cache.get(clientID)}`)) {
+        message.reply("Why are you pinging me, did you not read the syllabus?");
+    }
 })
 
 client.on(Events.GuildMemberAdd, member => {
