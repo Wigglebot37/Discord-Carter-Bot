@@ -43,6 +43,20 @@ client.on(Events.MessageCreate, message => {
     if(message.content.includes(`${message.guild.members.cache.get(clientID)}`)) {
         message.reply("Why are you pinging me, did you not read the syllabus?");
     }
+
+    introID='808569965548535830';
+    botchanID='1062152605389815818';
+    sendID='1025552870159945780';
+    if(message.channelId===introID) {
+        const role='1052826975657537578';
+        const getRole=message.member.guild.roles.cache.get(role);
+
+        message.member.roles.add(getRole);
+    } else if(message.channelId===botchanID) {
+        const channel=message.member.guild.channels.cache.get(sendID);
+        message.react(carter);
+        channel.send(message.content);
+    }
 })
 
 client.on(Events.GuildMemberAdd, member => {
