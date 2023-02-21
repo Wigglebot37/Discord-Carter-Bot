@@ -9,6 +9,7 @@ const client = new Client({
 client.commands = new Collection();
 
 const clientID='1054991224785870958';
+const wiggleID='392106677136261120';
 
 require('dotenv').config();
 
@@ -32,16 +33,24 @@ const waterfall='<:waterfall:1026187818407559239>';
 const golf='<:carterpog:1042179553990291566>';
 const agile='❤️';
 const carter='<:carter:1026007558416252968>';
+const thumb='👍';
 
 client.on(Events.MessageCreate, message => {
-    if(message.content.toLowerCase().includes("scrum")) message.react(scrum);
-    if(message.content.toLowerCase().includes("waterfall")) message.react(waterfall);
+    if(message.author.bot) return;
+    if(message.content.toLowerCase().includes("scrum") 
+        && !message.content.toLowerCase().includes(":scrum:")) message.react(scrum);
+    if(message.content.toLowerCase().includes("waterfall") 
+        && !message.content.toLowerCase().includes(":waterfall")) message.react(waterfall);
     if(message.content.toLowerCase().includes("golf")) message.react(golf);
     if(message.content.toLowerCase().includes("agile")) message.react(agile);
-    if(message.content.toLowerCase().includes("carter")) message.react(carter);
+    if(message.content.toLowerCase().includes("carter") 
+        && !message.content.toLowerCase().includes(":carter")) message.react(carter);
 
     if(message.content.includes(`${message.guild.members.cache.get(clientID)}`)) {
-        message.reply("Why are you pinging me, did you not read the syllabus?");
+        client.users.fetch(wiggleID).then((user)=> {
+            user.send(message.url);
+        })
+        //message.reply("Why are you pinging me, did you not read the syllabus?");
     }
 
     introID='808569965548535830';
@@ -54,8 +63,25 @@ client.on(Events.MessageCreate, message => {
         message.member.roles.add(getRole);
     } else if(message.channelId===botchanID) {
         const channel=message.member.guild.channels.cache.get(sendID);
-        message.react(carter);
-        channel.send(message.content);
+        message.react(thumb);
+
+        if(message.content.toLowerCase().startsWith('/reply')) {
+            end=message.content.indexOf(' ',8);
+            mid=message.content.indexOf('/',1);
+            chanid=message.content.substring(7,mid);
+            pingchan=message.member.guild.channels.cache.get(chanid);
+            pingmsg=message.content.substring(mid+1,end);
+            newcontent=message.content.substring(end+1,message.content.length);
+            pingchan.messages.fetch(pingmsg).then((msg)=> {
+                msg.reply(newcontent);
+            })
+        } else if(message.content.toLowerCase().startsWith('/chan')) {
+            end=message.content.indexOf(' ',7);
+            chanid=message.content.substring(6,end);
+            newchan=message.member.guild.channels.cache.get(chanid);
+            newcontent=message.content.substring(end+1,message.content.length);
+            newchan.send(newcontent);
+        } else channel.send(message.content);
     }
 })
 
