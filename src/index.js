@@ -34,6 +34,10 @@ const golf='<:carterpog:1042179553990291566>';
 const agile='❤️';
 const carter='<:carter:1026007558416252968>';
 const thumb='👍';
+const punch='<:carterpunch:1096170355665674271>';
+const welp='<:welp:1159353201485692950>';
+const gang='<:gang:1152499087803940874>';
+const shake='<:cartershake:1096170706716336278>';
 
 client.on(Events.MessageCreate, message => {
     if(message.author.bot) return;
@@ -45,6 +49,14 @@ client.on(Events.MessageCreate, message => {
     if(message.content.toLowerCase().includes("agile")) message.react(agile);
     if(message.content.toLowerCase().includes("carter") 
         && !message.content.toLowerCase().includes(":carter")) message.react(carter);
+    if(message.content.toLowerCase().includes("punch") 
+        && !message.content.toLowerCase().includes(":carterpunch")) message.react(punch);
+    if(message.content.toLowerCase().includes("welp") 
+        && !message.content.toLowerCase().includes(":welp")) message.react(welp);
+    if(message.content.toLowerCase().includes("gang") 
+        && !message.content.toLowerCase().includes(":gang")) message.react(gang);
+    if(message.content.toLowerCase().includes("shake") 
+        && !message.content.toLowerCase().includes(":cartershake")) message.react(shake);
 
     if(message.content.includes(`${message.guild.members.cache.get(clientID)}`)) {
         client.users.fetch(wiggleID).then((user)=> {
